@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1e8">
+  <meta name="description" content="Support DaCareGH's work with children in Ghana. Give through the foundation's official donation pages and follow its work. ">
+  <title>DaCareGH — Let care leave a trace</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+  <script>p5.disableFriendlyErrors = true;</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#f5f1e8;--paper2:#ebe4d5;--white:#fffdf8;--ink:#202b26;--muted:#68716a;--line:#d8d1c3;--rose:#b84e66;--rose-dark:#914056;--green:#31584b;--green2:#496d5c;--ochre:#d4a655;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid var(--rose);outline-offset:4px}.shell{max-width:1440px;margin:auto;padding:0 5.4vw}.topline{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-size:15px;font-weight:700;letter-spacing:-.035em;white-space:nowrap}.mark{display:grid;place-items:center;width:33px;height:33px;border:1px solid var(--rose);border-radius:50%;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--rose);line-height:1}.nav{display:flex;align-items:center;gap:29px}.nav a:not(.nav-give){font-size:11px;text-decoration:none;color:var(--muted);transition:color .2s}.nav a:not(.nav-give):hover{color:var(--rose-dark)}.nav-give,.btn{min-height:46px;display:inline-flex;justify-content:center;align-items:center;gap:12px;padding:0 19px;text-decoration:none;color:#fff;background:var(--rose);border:1px solid var(--rose);font-size:11px;font-weight:700;letter-spacing:.01em;transition:background .2s,transform .2s}.nav-give:hover,.btn:hover{background:var(--rose-dark);transform:translateY(-2px)}.arr{font-size:17px;font-weight:400}.skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:12px;z-index:10;padding:12px;background:var(--white)}
+    .hero{min-height:570px;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(390px,.98fr);gap:5.5vw;align-items:center;padding:66px 0 74px}.kicker{display:flex;align-items:center;gap:10px;margin:0;color:var(--rose-dark);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}.kicker:before{content:"";width:23px;height:1px;background:var(--rose)}h1,h2,h3,p{margin-top:0}h1{font-family:var(--serif);font-weight:500;font-size:clamp(49px,5.5vw,78px);letter-spacing:-.058em;line-height:.98;margin:20px 0 22px;max-width:625px}h1 em{color:var(--rose);font-style:normal}.intro{max-width:480px;margin:0 0 25px;color:#59645d;font-size:14px;line-height:1.85}.hero-actions{display:flex;align-items:center;gap:23px;flex-wrap:wrap}.plain-link{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-size:11px;font-weight:700;text-decoration:none}.plain-link span{color:var(--rose);font-size:18px;transition:transform .18s}.plain-link:hover span{transform:translateX(4px)}.assurance{display:flex;align-items:center;gap:8px;margin-top:23px;color:var(--muted);font-size:9px;line-height:1.5}.assurance:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+    .visual{position:relative;min-height:435px;isolation:isolate}.canvas-box{position:absolute;inset:0 0 20px 22px;overflow:hidden;background:#e7decc}.canvas-box:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(130deg,rgba(255,253,248,.45),transparent 54%,rgba(49,88,75,.12))}.canvas-box canvas{width:100%;height:100%;display:block}.art-label{position:absolute;left:20px;bottom:17px;z-index:2;color:rgba(32,43,38,.66);font-size:8px;letter-spacing:.17em;text-transform:uppercase}.seal{position:absolute;right:-14px;top:24px;z-index:3;width:92px;height:92px;display:grid;place-items:center;border-radius:50%;background:var(--rose);color:#fff;text-align:center;font-family:var(--serif);font-size:12px;line-height:1.2;transform:rotate(8deg);box-shadow:0 10px 26px rgba(77,37,47,.14)}.proof-note{position:absolute;right:15px;bottom:0;z-index:3;min-width:202px;display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--white);box-shadow:0 12px 32px rgba(38,48,40,.11)}.proof-note .flower{font-family:var(--serif);font-size:25px;color:var(--rose)}.proof-note small,.proof-note strong{display:block}.proof-note small{margin-bottom:4px;font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}.proof-note strong{font-size:11px;font-weight:600}.art-control{position:absolute;left:22px;top:14px;z-index:3;display:flex;align-items:center;gap:7px;border:1px solid rgba(32,43,38,.19);background:rgba(255,253,248,.7);padding:6px 9px;color:var(--ink);font:600 9px var(--sans);cursor:pointer}.art-control:hover{background:var(--white)}.art-control .playicon{color:var(--rose)}
+    .metrics{display:grid;grid-template-columns:1.15fr repeat(3,1fr);align-items:center;padding:24px 0 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.metrics-intro{padding-right:20px}.metrics-intro .kicker{font-size:8px}.metrics-intro p{margin:8px 0 0;font:500 16px/1.35 var(--serif)}.metric{min-height:54px;padding:0 22px;border-left:1px solid var(--line)}.metric strong{display:block;color:var(--green);font:500 31px/1 var(--serif);letter-spacing:-.04em}.metric span{display:block;margin-top:7px;color:var(--muted);font-size:9px;line-height:1.45}.source{display:block;margin-top:5px;color:#7e847d;font-size:8px;text-decoration:underline;text-underline-offset:2px}
+    .section{padding:76px 0}.work{display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw}.section-title{font:500 clamp(32px,3.3vw,45px)/1.08 var(--serif);letter-spacing:-.045em;margin:12px 0 0;max-width:420px}.work-copy{padding-top:25px;max-width:510px;color:var(--muted);font-size:12px;line-height:1.85}.work-copy p{margin-bottom:16px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin:19px 0 22px}.tag{padding:8px 10px;border:1px solid var(--line);color:#46564d;background:rgba(255,253,248,.42);font-size:9px}.more-link{display:inline-flex;align-items:center;gap:8px;color:var(--rose-dark);font-size:10px;font-weight:700;text-decoration:none}.more-link:hover{text-decoration:underline;text-underline-offset:4px}
+    .journey{background:var(--green);color:#f8f4eb}.journey .kicker{color:#e7bf80}.journey .kicker:before{background:#e7bf80}.journey-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:42px}.journey-heading .section-title{max-width:500px}.journey-heading .dek{max-width:280px;margin:0 0 3px;color:rgba(248,244,235,.67);font-size:11px;line-height:1.7}.timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0}.timeline:before{content:"";position:absolute;top:11px;left:4px;right:4px;height:1px;background:rgba(248,244,235,.28)}.milestone{position:relative;padding:37px 20px 0 0}.milestone:before{content:"";position:absolute;top:5px;left:0;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid #e7bf80;box-shadow:0 0 0 5px var(--green)}.year{color:#e7bf80;font-size:9px;font-weight:700;letter-spacing:.16em}.milestone h3{margin:13px 0 7px;font:500 19px/1.2 var(--serif);color:#fffdf8}.milestone p{max-width:220px;margin:0;color:rgba(248,244,235,.7);font-size:10px;line-height:1.7}.milestone .place{display:block;margin-top:10px;color:rgba(248,244,235,.45);font-size:8px;letter-spacing:.15em;text-transform:uppercase}
+    .voices{display:grid;grid-template-columns:.7fr 1.3fr;gap:7vw;align-items:start}.quote-mark{display:block;color:var(--rose);font:500 56px/.8 var(--serif)}blockquote{margin:0;max-width:720px;font:500 clamp(22px,2.6vw,32px)/1.35 var(--serif);letter-spacing:-.025em;color:#2c3932}.quote-credit{margin:20px 0 0;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase}.give-band{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;margin:0 0 56px;padding:27px 30px;background:var(--paper2)}.give-band h2{margin:0 0 7px;font:500 24px/1.2 var(--serif);letter-spacing:-.03em}.give-band p{margin:0;color:var(--muted);font-size:10px;line-height:1.6}.give-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.btn.secondary{background:transparent;border-color:var(--green);color:var(--green)}.btn.secondary:hover{background:var(--green);color:#fff}.footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 0 24px;border-top:1px solid var(--line);color:var(--muted);font-size:8px}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer a{color:var(--rose-dark);text-decoration:none}.footer a:hover{text-decoration:underline;text-underline-offset:3px}
+    @media(max-width:900px){.shell{padding:0 5vw}.hero{grid-template-columns:1fr;gap:32px;padding:53px 0 58px}.hero-copy{max-width:680px}.visual{width:min(100%,660px);min-height:400px;margin:auto}.metrics{grid-template-columns:1fr 1fr;row-gap:22px}.metrics-intro{grid-column:1/-1}.metric:nth-child(2){border-left:1px solid var(--line)}.metric:nth-child(3){padding-left:0;border-left:0}.work{gap:4vw}.voices{gap:5vw}.nav{gap:18px}}
+    @media(max-width:600px){.shell{padding:0 20px}.topline{height:auto;min-height:72px;flex-wrap:wrap;padding:12px 0 9px;gap:8px}.brand{font-size:14px}.mark{width:30px;height:30px}.nav{width:100%;order:2;display:flex;justify-content:space-between;gap:10px;padding-top:3px;overflow-x:auto}.nav a:not(.nav-give){display:inline-flex;align-items:center;min-height:34px;font-size:9px;white-space:nowrap}.nav-give{min-height:38px;padding:0 12px;margin-left:auto}.hero{padding:38px 0 46px;gap:30px}.hero h1{font-size:52px;max-width:420px}.intro{font-size:13px}.visual{min-height:318px}.canvas-box{inset:0 8px 19px 0}.seal{right:-3px;width:76px;height:76px;font-size:10px}.proof-note{right:0;min-width:170px;padding:11px 12px}.art-control{left:9px;top:9px}.metrics{padding:21px 0}.metric{padding:0 8px 0 14px}.metric:nth-child(3){padding-left:0}.metric strong{font-size:27px}.metric span{font-size:8px}.section{padding:52px 0}.work{grid-template-columns:1fr;gap:4px}.work-copy{padding-top:13px}.journey-heading{display:block;margin-bottom:30px}.journey-heading .dek{margin-top:14px}.timeline{grid-template-columns:1fr 1fr;row-gap:10px}.timeline:before{top:6px;bottom:6px;left:5px;right:auto;width:1px;height:auto}.milestone{padding:5px 10px 19px 27px;min-height:105px}.milestone:before{top:4px}.milestone h3{font-size:17px;margin:10px 0 6px}.milestone p{font-size:9px}.milestone .place{margin-top:7px}.voices{grid-template-columns:1fr;gap:20px}.quote-mark{font-size:46px}.give-band{grid-template-columns:1fr;margin-bottom:40px;padding:21px 18px}.give-actions{align-items:stretch}.give-actions .btn{flex:1;min-height:43px;padding:0 10px;font-size:10px}.footer{font-size:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <header class="topline">
+      <a class="brand" href="https://dacaregh.org/" aria-label="DaCareGH official website"><span class="mark">d</span><span>DaCare Foundation</span></a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#work">What care does</a><a href="#journey">The journey</a><a href="#impact">Impact</a>
+        <a class="nav-give" href="https://dacaregh.org/donate" target="_blank" rel="noopener noreferrer">Give to DaCare <span class="arr">↗</span></a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="kicker">For children in Ghana</p>
+          <h1 id="hero-title">Let your care leave <em>a trace.</em></h1>
+          <p class="intro">A gift can mean a meal, school supplies, time spent listening, or help with a hospital bill. DaCareGH works alongside children and families, then shares what that support made possible.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://dacaregh.org/donate" target="_blank" rel="noopener noreferrer">Give through DaCare <span class="arr">↗</span></a>
+            <a class="plain-link" href="#journey">Follow the work <span>→</span></a>
+          </div>
+          <p class="assurance">Independent support page. Giving happens only on DaCare's official site.</p>
+        </div>
+        <div class="visual" aria-label="Generative artwork of care moving outward">
+          <div class="canvas-box" id="care-art"><div class="art-label">A circle of care, growing</div></div>
+          <button class="art-control" id="art-toggle" type="button" aria-pressed="false" aria-label="Pause artwork"><span class="playicon">Ⅱ</span><span>Pause motion</span></button>
+          <div class="seal">Care<br>moves<br>forward</div>
+          <div class="proof-note"><span class="flower">✳</span><span><small>DaCare reports</small><strong>131+ children reached</strong></span></div>
+        </div>
+      </section>
+      <section class="metrics" id="impact" aria-labelledby="impact-title">
+        <div class="metrics-intro"><p class="kicker" id="impact-title">The work, in numbers</p><p>Care you can follow.</p><a class="source" href="https://dacaregh.org/" target="_blank" rel="noopener noreferrer">Figures from DaCareGH ↗</a></div>
+        <div class="metric"><strong>131+</strong><span>children reached so far</span></div>
+        <div class="metric"><strong>3</strong><span>hospital bills cleared</span></div>
+        <div class="metric"><strong>4</strong><span>outreaches completed</span></div>
+      </section>
+      <section class="section work" id="work" aria-labelledby="work-title">
+        <div><p class="kicker">Support that meets a real need</p><h2 class="section-title" id="work-title">Care looks different for every child.</h2></div>
+        <div class="work-copy">
+          <p>DaCare's work includes practical help for children and families: everyday essentials, learning materials, mentorship, and support when medical costs stand in the way.</p>
+          <div class="tags" aria-label="Ways DaCare supports children"><span class="tag">Food and clothing</span><span class="tag">School materials</span><span class="tag">Mentorship</span><span class="tag">Hospital support</span></div>
+          <p>The foundation welcomes financial and physical donations. Its official site explains how to give and how the work is tracked.</p>
+          <a class="more-link" href="https://dacaregh.org/causes" target="_blank" rel="noopener noreferrer">Explore DaCare's causes <span>↗</span></a>
+        </div>
+      </section>
+      <section class="journey" id="journey" aria-labelledby="journey-title">
+        <div class="shell section">
+          <div class="journey-heading"><div><p class="kicker">A record of showing up</p><h2 class="section-title" id="journey-title">Four years. Four places.</h2></div><p class="dek">DaCare's published journey, from its launch in Derrick's name to visits with children and families.</p></div>
+          <div class="timeline">
+            <article class="milestone"><span class="year">2022</span><h3>The beginning</h3><p>The foundation launches in Derrick's name.</p><span class="place">Accra</span></article>
+            <article class="milestone"><span class="year">2023</span><h3>First donation</h3><p>A visit to Rafiki Satellite Village.</p><span class="place">Winneba</span></article>
+            <article class="milestone"><span class="year">2024</span><h3>Second visit</h3><p>At Christian Orphanage Home.</p><span class="place">Kasoa</span></article>
+            <article class="milestone"><span class="year">2025</span><h3>Third visit</h3><p>At the Plastic Surgery and Burns Unit.</p><span class="place">Korle Bu</span></article>
+          </div>
+        </div>
+      </section>
+      <section class="section voices" aria-label="A voice from the field">
+        <div><p class="kicker">In their words</p><h2 class="section-title">The work is felt up close.</h2></div>
+        <div><span class="quote-mark" aria-hidden="true">“</span><blockquote>When DacareGH walks through our gate, the children run before I can call them. They bring rice, soap, school things, and time. They sit, they listen, they pray with us. That steadiness is what keeps this home standing.</blockquote><p class="quote-credit">Director, Rafiki Satellite Village · As published by DaCareGH</p></div>
+      </section>
+      <section class="give-band" id="give" aria-labelledby="give-title">
+        <div><h2 id="give-title">Give in the way that works for you.</h2><p>Choose a local gift or follow DaCare's instructions for giving from abroad. Payment is handled on the foundation's own site.</p></div>
+        <div class="give-actions"><a class="btn" href="https://dacaregh.org/donate" target="_blank" rel="noopener noreferrer">Give locally <span class="arr">↗</span></a><a class="btn secondary" href="https://dacaregh.org/give-from-abroad" target="_blank" rel="noopener noreferrer">Give from abroad <span class="arr">↗</span></a></div>
+      </section>
+    </main>
+    <footer class="footer"><span>DaCare Foundation · Ghana</span><div class="footer-links"><a href="https://dacaregh.org/" target="_blank" rel="noopener noreferrer">Official website ↗</a><a href="https://dacaregh.org/causes" target="_blank" rel="noopener noreferrer">Causes ↗</a><a href="https://dacaregh.org/donate" target="_blank" rel="noopener noreferrer">Donate ↗</a></div></footer>
+  </div>
+  <script>
+    const sketch = p => {
+      let particles=[], w=1,h=1,t=0, paused=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const colors=['#b84e66','#d4a655','#31584b','#7f9a89','#c88575'];
+      const host=()=>document.getElementById('care-art');
+      function rebuild(){
+        const box=host(); if(!box)return;
+        w=Math.max(1,box.clientWidth);h=Math.max(1,box.clientHeight);p.resizeCanvas(w,h);
+        particles=[];p.randomSeed(31);p.noiseSeed(31);
+        const n=Math.max(230,Math.floor(w*h/780));
+        for(let i=0;i<n;i++) particles.push({a:p.random(p.TWO_PI),r:p.random(.11,.51),speed:p.random(.13,.5),size:p.random(.8,2.7),phase:p.random(p.TWO_PI),color:p.floor(p.random(colors.length)),thread:p.random()>.88});
+      }
+      p.setup=()=>{const c=p.createCanvas(host().clientWidth,host().clientHeight);c.parent(host());p.pixelDensity(1);rebuild();};
+      p.draw=()=>{
+        if(!paused)t+=.004;
+        p.clear();const cx=w*.52,cy=h*.48,S=Math.min(w,h)*.88;
+        for(let k=0;k<7;k++){
+          p.noFill();p.stroke(49,88,75,12+k%2*3);p.strokeWeight(k===3?1.15:.65);
+          const r=S*(.12+k*.071)+Math.sin(t*1.2+k*.8)*3;p.ellipse(cx,cy,r*2,r*1.52);
+        }
+        for(const d of particles){
+          const drift=Math.sin(d.a*2.5+t*.7+d.phase)*.12;
+          const rad=d.r*(.79+.16*Math.sin(t*d.speed+d.phase));
+          const a=d.a+drift+Math.sin(t*.4+d.phase)*.035;
+          const x=cx+Math.cos(a)*rad*S,y=cy+Math.sin(a)*rad*S*.76;
+          p.noStroke();p.fill(colors[d.color]);p.circle(x,y,d.size*(.65+.45*Math.sin(t*1.8+d.phase)));
+          if(d.thread){p.stroke(colors[d.color]+'75');p.strokeWeight(.55);p.line(x,y,cx+Math.cos(a)*rad*S*.95,cy+Math.sin(a)*rad*S*.72);}
+        }
+        p.noStroke();p.fill(49,88,75,15);p.circle(cx,cy,S*.28);p.fill('#f5f1e8');p.circle(cx,cy,S*.19);p.fill('#b84e66');p.circle(cx,cy,S*.085);p.fill('#fffdf8');p.circle(cx-S*.017,cy-S*.017,S*.019);
+        if(paused)p.noLoop();
+      };
+      p.windowResized=()=>{rebuild();if(paused)p.redraw();};
+      window.setArtworkMotion=state=>{paused=state;p.loop();if(paused)p.noLoop();};
+    };
+    new p5(sketch);
+    const toggle=document.getElementById('art-toggle');
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion){toggle.setAttribute('aria-pressed','true');toggle.setAttribute('aria-label','Play artwork');toggle.querySelector('.playicon').textContent='▶';toggle.querySelector('span:last-child').textContent='Play motion';window.setArtworkMotion(true);}
+    toggle.addEventListener('click',()=>{
+      const isPaused=toggle.getAttribute('aria-pressed')==='true';
+      const next=!isPaused;toggle.setAttribute('aria-pressed',String(next));window.setArtworkMotion(next);
+      toggle.querySelector('.playicon').textContent=next?'▶':'Ⅱ';toggle.querySelector('span:last-child').textContent=next?'Play motion':'Pause motion';toggle.setAttribute('aria-label',next?'Play artwork':'Pause artwork');
+    });
+  </script>
+</body>
+</html>
